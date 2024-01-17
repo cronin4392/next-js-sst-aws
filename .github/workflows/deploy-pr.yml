@@ -41,4 +41,4 @@ jobs:
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           message: |
-            "Deployed app can be previewed at ${{ env.preview_url }}"
+            Deployed app can be previewed at ${{ env.preview_url }}
