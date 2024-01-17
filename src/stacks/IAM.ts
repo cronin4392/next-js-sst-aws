@@ -59,6 +59,7 @@ export function IAM({ app, stack }: StackContext) {
                 "ssm:GetParametersByPath",
                 "ssm:PutParameter",
                 "sts:AssumeRole",
+                "sts:AssumeRoleWithWebIdentity",
               ],
               resources: ["*"],
             }),
