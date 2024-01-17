@@ -33,7 +33,8 @@ jobs:
         run: |
           DEPLOY_OUTPUT="$(npx sst deploy --stage pr-${{ github.event.number }})"
           echo "$DEPLOY_OUTPUT"
-          PREVIEW_URL=$(echo "$DEPLOY_OUTPUT" | grep -o 'http[s]://[^ ]*' | head -n 1)  # assuming the URL starts with http(s) and ends with a space
+          # PREVIEW_URL=$(echo "$DEPLOY_OUTPUT" | grep -o 'http[s]://[^ ]*' | head -n 1) 
+          PREVIEW_URL=$(echo "$DEPLOY_OUTPUT" | grep -o 'https://[^ ]*.cloudfront.net' | head -n 1)
           echo "Preview URL: $PREVIEW_URL"
           echo "preview_url=$PREVIEW_URL" >> "$GITHUB_ENV"
       - name: Comment PR
