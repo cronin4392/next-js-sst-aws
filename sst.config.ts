@@ -1,6 +1,6 @@
 import { SSTConfig } from "sst";
 import { NextjsSite } from "sst/constructs";
-import { IAM } from "@/stacks/iam";
+import { IAM } from "@/stacks/IAM";
 
 export default {
   config(_input) {
