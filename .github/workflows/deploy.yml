@@ -1,4 +1,4 @@
-name: SST workflow
+name: Deploy Production
 on: push
 
 # Concurrency group name ensures concurrent workflow runs wait for any in-progress job to finish
@@ -10,7 +10,7 @@ permissions:
   contents: read # This is required for actions/checkout
 
 jobs:
-  DeployApp:
+  DeployProd:
     runs-on: ubuntu-latest
     # env:
     #Define your envs needed for static generation:
@@ -24,6 +24,7 @@ jobs:
           role-to-assume: arn:aws:iam::211125605859:role/GitHubSstDeployer
           role-duration-seconds: 900 #adjust as needed for your build time
           aws-region: us-east-1
+      - name: Install dependencies
+        run: npm i
       - name: Deploy app
-        run: |
-          npm i && npx sst deploy --stage prod
+        run: npx sst deploy --stage prod
