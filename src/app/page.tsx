@@ -25,7 +25,6 @@ export default function Home() {
               priority
             />
           </a>
-          <p>Check out this update I made</p>
         </div>
       </div>
 
