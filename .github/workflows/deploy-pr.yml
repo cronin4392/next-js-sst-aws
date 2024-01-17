@@ -18,14 +18,14 @@ jobs:
     #Define your envs needed for static generation:
     # ENV_NAME: ${{ secrets.ENV_NAME }}
     steps:
-      # - name: Git clone the repository
-      #   uses: actions/checkout@v3
-      # - name: Configure AWS credentials
-      #   uses: aws-actions/configure-aws-credentials@v2
-      #   with:
-      #     role-to-assume: arn:aws:iam::211125605859:role/GitHubSstDeployer
-      #     role-duration-seconds: 900 #adjust as needed for your build time
-      #     aws-region: us-east-1
+      - name: Git clone the repository
+        uses: actions/checkout@v3
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::211125605859:role/GitHubSstDeployer
+          role-duration-seconds: 900 #adjust as needed for your build time
+          aws-region: us-east-1
       # - name: Install dependencies
       #   run: npm i
       - name: Deploy app
