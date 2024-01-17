@@ -1,6 +1,6 @@
 import { SSTConfig } from "sst";
-import { NextjsSite } from "sst/constructs";
 import { IAM } from "@/stacks/IAM";
+import { NextJs } from "@/stacks/NextJs";
 
 export default {
   config(_input) {
@@ -11,14 +11,7 @@ export default {
     };
   },
   stacks(app) {
-    app.stack(function Site({ stack }) {
-      const site = new NextjsSite(stack, "site");
-
-      stack.addOutputs({
-        SiteUrl: site.url,
-      });
-
-      app.stack(IAM);
-    });
+    app.stack(NextJs);
+    app.stack(IAM);
   },
 } satisfies SSTConfig;
