@@ -4,10 +4,14 @@ import { StackContext } from "sst/constructs";
 
 export function IAM({ app, stack }: StackContext) {
   if (app.stage === "prod") {
-    const provider = new iam.OpenIdConnectProvider(stack, "GitHub", {
-      url: "https://token.actions.githubusercontent.com",
-      clientIds: ["sts.amazonaws.com"],
-    });
+    const provider = new iam.OpenIdConnectProvider(
+      stack,
+      "NextJsSstAws-IamStack",
+      {
+        url: "https://token.actions.githubusercontent.com",
+        clientIds: ["sts.amazonaws.com"],
+      }
+    );
 
     const organization = "cronin4392"; // Use your GitHub organization
     const repository = "next-js-sst-aws"; // Use your GitHub repository
