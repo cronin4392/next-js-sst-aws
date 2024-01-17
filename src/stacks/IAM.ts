@@ -12,7 +12,7 @@ export function IAM({ app, stack }: StackContext) {
     const organization = "cronin4392"; // Use your GitHub organization
     const repository = "next-js-sst-aws"; // Use your GitHub repository
 
-    new iam.Role(stack, "GitHubActionsRole", {
+    new iam.Role(stack, "GitHubSstDeployer", {
       assumedBy: new iam.OpenIdConnectPrincipal(provider).withConditions({
         StringLike: {
           "token.actions.githubusercontent.com:sub": `repo:${organization}/${repository}:*`,
