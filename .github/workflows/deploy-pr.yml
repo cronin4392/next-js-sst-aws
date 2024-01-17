@@ -29,4 +29,13 @@ jobs:
       - name: Install dependencies
         run: npm i
       - name: Deploy app
-        run: npx sst deploy --stage pr-${{ github.event.number }}
+        run: |
+          DEPLOY_OUTPUT="$(npx sst deploy --stage pr-${{ github.event.number }})"
+          echo "$DEPLOY_OUTPUT"
+          PREVIEW_URL=$(echo "$DEPLOY_OUTPUT" | grep -o 'http[s]://[^ ]*')  # assuming the URL starts with http(s) and ends with a space
+          echo "PREVIEW_URL=$PREVIEW_URL" >> $GITHUB_ENV
+      - name: Comment PR
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          message: |
+            "Deployed app can be previewed at ${{env.PREVIEW_URL}}"
