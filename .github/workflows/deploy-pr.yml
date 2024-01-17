@@ -18,16 +18,16 @@ jobs:
     #Define your envs needed for static generation:
     # ENV_NAME: ${{ secrets.ENV_NAME }}
     steps:
-      - name: Git clone the repository
-        uses: actions/checkout@v3
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          role-to-assume: arn:aws:iam::211125605859:role/GitHubSstDeployer
-          role-duration-seconds: 900 #adjust as needed for your build time
-          aws-region: us-east-1
-      - name: Install dependencies
-        run: npm i
+      # - name: Git clone the repository
+      #   uses: actions/checkout@v3
+      # - name: Configure AWS credentials
+      #   uses: aws-actions/configure-aws-credentials@v2
+      #   with:
+      #     role-to-assume: arn:aws:iam::211125605859:role/GitHubSstDeployer
+      #     role-duration-seconds: 900 #adjust as needed for your build time
+      #     aws-region: us-east-1
+      # - name: Install dependencies
+      #   run: npm i
       - name: Deploy app
         run: |
           DEPLOY_OUTPUT="$(npx sst deploy --stage pr-${{ github.event.number }})"
@@ -38,9 +38,9 @@ jobs:
           echo "2"
           echo "action_state=yellow" >> "$GITHUB_ENV"
           echo "3"
-          echo "PREVIEW_URL=$PREVIEW_URL" >> "$GITHUB_ENV"
+          echo "preview_url=https://google.com" >> "$GITHUB_ENV"
       - name: Comment PR
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           message: |
-            "Deployed app can be previewed at $PREVIEW_URL"
+            "Deployed app can be previewed at $preview_url"
