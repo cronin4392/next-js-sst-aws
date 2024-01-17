@@ -22,7 +22,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: arn:aws:iam::211125605859:role/GitHubSstDeployer
-          role-duration-seconds: 360 #adjust as needed for your build time
+          role-duration-seconds: 900 #adjust as needed for your build time
           aws-region: us-east-1
       - name: Deploy app
         run: |
