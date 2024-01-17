@@ -34,7 +34,7 @@ jobs:
           echo "$DEPLOY_OUTPUT"
           PREVIEW_URL=$(echo "$DEPLOY_OUTPUT" | grep -o 'http[s]://[^ ]*')  # assuming the URL starts with http(s) and ends with a space
           echo "Preview URL: $PREVIEW_URL"
-          echo "PREVIEW_URL=$PREVIEW_URL" >> $GITHUB_ENV
+          echo "PREVIEW_URL=$PREVIEW_URL" >> "$GITHUB_ENV"
       - name: Comment PR
         uses: marocchino/sticky-pull-request-comment@v2
         with:
