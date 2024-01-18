@@ -10,6 +10,7 @@ concurrency:
 permissions:
   id-token: write # This is required for requesting the JWT
   contents: read # This is required for actions/checkout
+  pull-requests: write
 
 jobs:
   DeployPR:
@@ -29,4 +30,13 @@ jobs:
       - name: Install dependencies
         run: npm i
       - name: Deploy app
-        run: npx sst deploy --stage pr-${{ github.event.number }}
+        run: |
+          DEPLOY_OUTPUT="$(npx sst deploy --stage pr-${{ github.event.number }})"
+          echo "$DEPLOY_OUTPUT"
+          PREVIEW_URL=$(echo "$DEPLOY_OUTPUT" | grep -o 'https://[^ ]*.cloudfront.net' | head -n 1)
+          echo "preview_url=$PREVIEW_URL" >> "$GITHUB_ENV"
+      - name: Comment PR
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          message: |
+            Deployed app can be previewed at ${{ env.preview_url }}
